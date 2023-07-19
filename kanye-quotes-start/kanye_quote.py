@@ -1,7 +1,19 @@
+import requests
 from tkinter import *
 
 
 def get_quote():
+    url = "https://api.kanye.rest"
+    response = requests.get(url=url)
+
+    if response.status_code != 200:
+        raise Exception(f"The request did not work: {response.raise_for_status()}")
+    else:
+        data = response.json()
+        keny_quote = data["quote"]
+        canvas.itemconfig(quote_text,text=keny_quote)
+
+        # print(keny_quote)
     pass
     #Write your code here.
 
